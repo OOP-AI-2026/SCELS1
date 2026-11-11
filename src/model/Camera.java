@@ -1,8 +1,6 @@
-
 package model;
 
 public class Camera extends EquipmentItem {
-
     private int megapixels;
     private boolean lensKitIncluded;
 
@@ -13,25 +11,21 @@ public class Camera extends EquipmentItem {
         this.lensKitIncluded = lensKitIncluded;
     }
 
-    public int getMegapixels() {
-        return megapixels;
-    }
-
-    public boolean isLensKitIncluded() {
-        return lensKitIncluded;
-    }
+    public int getMegapixels() { return megapixels; }
 
     @Override
     public String getTechnicalDescription() {
-        return "Camera with " + megapixels + "MP, Lens Kit: " + lensKitIncluded;
+        return "Camera with " + megapixels + " MP";
     }
 
     @Override
     public double calculateFee(int numberOfDays) {
-        double fee = getDailyFee() * numberOfDays;
-        if (lensKitIncluded) {
-            fee += 5.0 * numberOfDays;
-        }
-        return fee;
+        if (numberOfDays <= 0) return 0.0;
+        return getDailyFee() * numberOfDays + 20.0;
+    }
+
+    @Override
+    public String getDisplayLabel() {
+        return "Camera / " + super.getDisplayLabel();
     }
 }
